@@ -45,7 +45,8 @@ const SearchComponent = () => {
         {data && (
           <ul>
             <li>{data.artist}</li>
-            <li>{}</li>
+            <li>Preview: {data.name}</li>
+            <audio src={data.previewUrl} controls></audio>
             <img src={data.image} alt="artist" id="artistImg" />
           </ul>
         )}
