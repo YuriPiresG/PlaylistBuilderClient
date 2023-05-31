@@ -16,20 +16,12 @@ const useSearchSpotify = (query: string, accessToken: string) => {
 
     const track = items[0];
 
-    const artistResponse = await axios.get(track.artists[0].href, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-
-    const artistData = artistResponse.data;
-    const artistGenres = artistData.genres;
-    const artistImage = artistData.images[0]?.url;
-
     return {
+      id: track.id,
+      image: track.album.images[0].url,
       artist: track.artists[0].name,
-      genres: artistGenres,
-      image: artistImage,
+      name: track.name,
+      previewUrl: track.preview_url,
     };
   };
 
