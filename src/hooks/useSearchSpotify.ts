@@ -14,7 +14,7 @@ const useSearchSpotify = (query: string, accessToken: string) => {
 
     const items = response.data.tracks.items;
 
-    const track = items[0]; // Retrieve the first track only
+    const track = items[0];
 
     const artistResponse = await axios.get(track.artists[0].href, {
       headers: {
@@ -24,10 +24,12 @@ const useSearchSpotify = (query: string, accessToken: string) => {
 
     const artistData = artistResponse.data;
     const artistGenres = artistData.genres;
+    const artistImage = artistData.images[0]?.url;
 
     return {
       artist: track.artists[0].name,
       genres: artistGenres,
+      image: artistImage,
     };
   };
 

@@ -1,0 +1,33 @@
+#test img {
+  width: 15rem;
+
+  -webkit-animation: fadein 1.5s;
+}
+#test ul {
+  -webkit-animation: fadein 1s;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/* 
+#search{
+    background-color: red;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+}
+#result{
+    background-color: purple;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 50%;
+} */
