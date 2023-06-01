@@ -5,6 +5,7 @@ import { Button, Input, Card, Image, Text, Badge, Group } from "@mantine/core";
 import useGetTracks from "../hooks/useGetTracks";
 import "./styles.css";
 import logo from "/src/assets/logo.png";
+import BsSpotify from "react-icons/bs";
 
 const SearchComponent = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -46,7 +47,6 @@ const SearchComponent = () => {
           <Image
             src={logo}
             width={300}
-           
             style={{
               position: "absolute",
               left: "93%",
@@ -118,6 +118,7 @@ const SearchComponent = () => {
                 style={{
                   backgroundColor: "#f3f4f6",
                   borderRadius: "8px",
+                  marginTop: "5%",
                 }}
               >
                 <div
@@ -134,6 +135,7 @@ const SearchComponent = () => {
                     height={80}
                     style={{ borderRadius: "8px" }}
                   />
+
                   <div style={{ marginLeft: "12px" }}>
                     <Text size="lg" weight={700}>
                       Artist: {recommendation.artist}
@@ -142,6 +144,7 @@ const SearchComponent = () => {
                   </div>
                 </div>
                 <Text>song: {recommendation.name}</Text>
+
                 <audio src={recommendation.previewUrl} controls />
               </Card>
             ))}
