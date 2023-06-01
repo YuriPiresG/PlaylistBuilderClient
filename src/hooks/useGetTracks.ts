@@ -19,6 +19,7 @@ const useGetTracks = (id: string, accessToken: string) => {
       name: track.name,
       image: track.album.images[0].url,
       previewUrl: track.preview_url,
+      id: track.id,
     }));
   };
 

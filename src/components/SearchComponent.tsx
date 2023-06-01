@@ -1,11 +1,20 @@
+import {
+  Badge,
+  Button,
+  Card,
+  Group,
+  Image,
+  Input,
+  Text,
+  LoadingOverlay,
+} from "@mantine/core";
 import React, { useState } from "react";
-import useSpotifySearch from "../hooks/useSearchSpotify";
+import { BsSpotify } from "react-icons/bs";
 import useAccessToken from "../hooks/useAccessToken";
-import { Button, Input, Card, Image, Text, Badge, Group } from "@mantine/core";
 import useGetTracks from "../hooks/useGetTracks";
+import useSpotifySearch from "../hooks/useSearchSpotify";
 import "./styles.css";
 import logo from "/src/assets/logo.png";
-import BsSpotify from "react-icons/bs";
 
 const SearchComponent = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -13,20 +22,15 @@ const SearchComponent = () => {
 
   const accessToken = useAccessToken();
 
-  const { data, isLoading, isError, error } = useSpotifySearch(
-    searchQuery,
-    accessToken
-  );
+  const { data, isLoading } = useSpotifySearch(searchQuery, accessToken);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
   };
-  const {
-    data: recommendationData,
-    isLoading: isRecommendationLoading,
-    isError: isRecommendationError,
-  } = useGetTracks(data?.id || [], accessToken);
-  console.log(recommendationData);
+  const { data: recommendationData } = useGetTracks(
+    data?.id || [],
+    accessToken
+  );
 
   return (
     <div id="test">
@@ -98,6 +102,18 @@ const SearchComponent = () => {
               <Text size="lg" weight={700}>
                 {data?.artist}
               </Text>
+              <Button
+                color="green"
+                style={{ width: "13rem" }}
+                onClick={() =>
+                  window.open(
+                    `https://open.spotify.com/track/${data?.id}`,
+                    "_blank"
+                  )
+                }
+              >
+                <BsSpotify />
+              </Button>
             </div>
           </div>
           <Text>{data?.name}</Text>
@@ -106,6 +122,11 @@ const SearchComponent = () => {
       </Group>
       {recommendationData && (
         <div>
+          <LoadingOverlay
+            visible={isLoading}
+            overlayBlur={2}
+            transitionDuration={500}
+          />
           <Text fz="xl" color="white" weight={700}>
             Recommendations
           </Text>
@@ -140,6 +161,18 @@ const SearchComponent = () => {
                     <Text size="lg" weight={700}>
                       Artist: {recommendation.artist}
                     </Text>
+                    <Button
+                      color="green"
+                      style={{ width: "13rem" }}
+                      onClick={() =>
+                        window.open(
+                          `https://open.spotify.com/track/${recommendation.id}`,
+                          "_blank"
+                        )
+                      }
+                    >
+                      <BsSpotify />
+                    </Button>
                     <Badge color="teal">{recommendation.genres}</Badge>
                   </div>
                 </div>
