@@ -58,6 +58,7 @@ const SearchComponent = () => {
               transform: "translate(-50%, -50%)",
             }}
           />
+
           <Button
             style={{
               position: "absolute",
@@ -102,18 +103,20 @@ const SearchComponent = () => {
               <Text size="lg" weight={700}>
                 {data?.artist}
               </Text>
-              <Button
-                color="green"
-                style={{ width: "13rem" }}
-                onClick={() =>
-                  window.open(
-                    `https://open.spotify.com/track/${data?.id}`,
-                    "_blank"
-                  )
-                }
-              >
-                <BsSpotify />
-              </Button>
+              {data && (
+                <Button
+                  color="green"
+                  style={{ width: "13rem" }}
+                  onClick={() =>
+                    window.open(
+                      `https://open.spotify.com/track/${data?.id}`,
+                      "_blank"
+                    )
+                  }
+                >
+                  <BsSpotify />
+                </Button>
+              )}
             </div>
           </div>
           <Text>{data?.name}</Text>
