@@ -3,21 +3,33 @@ body {
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
 }
+
 ul {
   color: white;
 }
+
 h3 {
   color: white;
 }
+
 #test img {
   width: 15rem;
   animation: mymove 1.5s;
   animation-timing-function: ease;
   -webkit-animation: fadein 1.5s;
 }
+
 #test ul {
   -webkit-animation: fadein 1s;
 }
+
+#logo {
+  -webkit-animation: fadein 1.5s;
+  width: max-content;
+  display: absolute;
+  margin-left: auto;
+}
+
 @keyframes fadein {
   from {
     opacity: 0;
@@ -26,9 +38,61 @@ h3 {
     opacity: 1;
   }
 }
-.image {
-  width: 15rem;
-  animation: mymove 1.5s;
-  animation-timing-function: ease;
-  -webkit-animation: fadein 1.5s;
+#search {
+  text-align: center;
+}
+
+#search form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+#search form > * {
+  margin-bottom: 1rem;
+}
+
+#search form button {
+  width: 5%;
+}
+#inputCard{ 
+margin-right: auto;
+}
+/* Responsive styles for mobile devices */
+@media screen and (max-width: 767px) {
+  #test {
+    padding: 0 1rem;
+  }
+
+  #test img {
+    width: 8rem;
+  }
+
+  #search {
+    text-align: center;
+  }
+
+  #search form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+  }
+
+  #search form > * {
+    margin-bottom: 1rem;
+  }
+
+  #search form button {
+    width: 100%;
+  }
+
+  .image {
+    width: 8rem;
+  }
+  #logo {
+    width: 8rem;
+    margin-left: 10rem;
+  }
 }

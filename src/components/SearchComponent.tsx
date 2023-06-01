@@ -33,96 +33,81 @@ const SearchComponent = () => {
   );
 
   return (
-    <div id="test">
-      <div id="search">
-        <form onSubmit={handleSearch}>
-          <Input
-            style={{
-              position: "absolute",
-              left: "50%",
-              top: "10%",
-              transform: "translate(-50%, -50%)",
-            }}
-            type="text"
-            placeholder="Search for a track song."
-            value={searchBar}
-            onChange={(e) => setSearchBar(e.target.value)}
-          />
-          <Image
-            src={logo}
-            width={300}
-            style={{
-              position: "absolute",
-              left: "93%",
-              top: "15%",
-              transform: "translate(-50%, -50%)",
-            }}
-          />
-
-          <Button
-            style={{
-              position: "absolute",
-              left: "57.5%",
-              top: "10%",
-              transform: "translate(-50%, -50%)",
-            }}
-            onClick={() => setSearchQuery(searchBar)}
-            disabled={searchBar === ""}
-          >
-            Search
-          </Button>
-        </form>
-      </div>
+    <div id="search">
+      <form onSubmit={handleSearch}>
+        <Input
+          className="search-input"
+          type="text"
+          style={{ display: "inline-block" }}
+          placeholder="Search for a track song."
+          value={searchBar}
+          onChange={(e) => setSearchBar(e.target.value)}
+        />
+        <Button
+          className="search-button"
+          onClick={() => setSearchQuery(searchBar)}
+          disabled={searchBar === ""}
+        >
+          Search
+        </Button>
+      </form>
 
       <Group position="apart" spacing="md">
-        <Card
-          key={data?.artist}
-          shadow="xs"
-          padding="md"
-          style={{
-            backgroundColor: "#f3f4f6",
-            borderRadius: "8px",
-          }}
-        >
-          <div
+        <div id="logo">
+          <Image src={logo} />
+        </div>
+        <div id="inputCard">
+          <Card
+            key={data?.artist}
+            shadow="xs"
+            padding="md"
             style={{
-              display: "flex",
-              alignItems: "center",
-              marginBottom: "8px",
+              backgroundColor: "#f3f4f6",
+              borderRadius: "8px",
             }}
           >
-            <Image
-              src={data?.image}
-              alt={data?.artist}
-              className="image"
-              width={80}
-              height={80}
-              style={{ borderRadius: "8px" }}
-            />
-            <div style={{ marginLeft: "12px" }}>
-              <Text size="lg" weight={700}>
-                {data?.artist}
-              </Text>
-              {data && (
-                <Button
-                  color="green"
-                  style={{ width: "13rem" }}
-                  onClick={() =>
-                    window.open(
-                      `https://open.spotify.com/track/${data?.id}`,
-                      "_blank"
-                    )
-                  }
-                >
-                  <BsSpotify />
-                </Button>
-              )}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                marginBottom: "8px",
+              }}
+            >
+              <Image
+                src={data?.image}
+                alt={data?.artist}
+                className="image"
+                width={80}
+                height={80}
+                style={{ borderRadius: "8px" }}
+              />
+              <div style={{ marginLeft: "12px" }}>
+                <Text size="lg" weight={700}>
+                  {data?.artist}
+                </Text>
+                {data && (
+                  <Button
+                    color="green"
+                    style={{ width: "13rem" }}
+                    onClick={() =>
+                      window.open(
+                        `https://open.spotify.com/track/${data?.id}`,
+                        "_blank"
+                      )
+                    }
+                  >
+                    <BsSpotify />
+                  </Button>
+                )}
+              </div>
             </div>
-          </div>
-          <Text>{data?.name}</Text>
-          <audio src={data?.previewUrl} controls />
-        </Card>
+
+            <Text>{data?.name}</Text>
+            <audio src={data?.previewUrl} controls />
+          </Card>
+        </div>
       </Group>
+
       {recommendationData && (
         <div>
           <LoadingOverlay
