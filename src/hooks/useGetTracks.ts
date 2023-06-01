@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
-const useGetTracks = (id: string, accessToken: string) => {
-  const searchRecommendations = async () => {
+const useGetTracks = (id: string, accessToken: string, isWindowFocused: boolean) => {
+  const useGetTracks = async () => {
     const response = await axios.get(
       `https://api.spotify.com/v1/recommendations?seed_tracks=${id}&limit=10`,
       {
@@ -23,8 +23,12 @@ const useGetTracks = (id: string, accessToken: string) => {
     }));
   };
 
-  return useQuery(["spotifyRecommendations", id], searchRecommendations, {
+  const query = useQuery(["spotifyRecommendations", id], useGetTracks, {
     enabled: !!id && !!accessToken,
+    refetchOnWindowFocus: false,
   });
+
+  return query;
 };
+
 export default useGetTracks;

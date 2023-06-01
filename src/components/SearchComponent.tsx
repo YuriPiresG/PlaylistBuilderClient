@@ -29,7 +29,8 @@ const SearchComponent = () => {
   };
   const { data: recommendationData } = useGetTracks(
     data?.id || [],
-    accessToken
+    accessToken,
+    isLoading
   );
 
   return (
