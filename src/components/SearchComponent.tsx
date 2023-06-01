@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import useSpotifySearch from "../hooks/useSearchSpotify";
 import useAccessToken from "../hooks/useAccessToken";
-import { Button, Input } from "@mantine/core";
+import { Button, Input, Card, Image, Text, Badge, Group } from "@mantine/core";
 import useGetTracks from "../hooks/useGetTracks";
 import "./styles.css";
+import logo from "/src/assets/logo.png";
 
 const SearchComponent = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -15,12 +16,10 @@ const SearchComponent = () => {
     searchQuery,
     accessToken
   );
-  console.log(data);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
   };
-  const [tracks, setTracks] = useState([]);
   const {
     data: recommendationData,
     isLoading: isRecommendationLoading,
@@ -33,36 +32,120 @@ const SearchComponent = () => {
       <div id="search">
         <form onSubmit={handleSearch}>
           <Input
+            style={{
+              position: "absolute",
+              left: "50%",
+              top: "10%",
+              transform: "translate(-50%, -50%)",
+            }}
             type="text"
-            placeholder="Search for an artist"
+            placeholder="Search for a track song."
             value={searchBar}
             onChange={(e) => setSearchBar(e.target.value)}
           />
-          <Button onClick={() => setSearchQuery(searchBar)}>Search</Button>
+          <Image
+            src={logo}
+            width={300}
+           
+            style={{
+              position: "absolute",
+              left: "93%",
+              top: "15%",
+              transform: "translate(-50%, -50%)",
+            }}
+          />
+          <Button
+            style={{
+              position: "absolute",
+              left: "57.5%",
+              top: "10%",
+              transform: "translate(-50%, -50%)",
+            }}
+            onClick={() => setSearchQuery(searchBar)}
+            disabled={searchBar === ""}
+          >
+            Search
+          </Button>
         </form>
       </div>
-      <div id="result">
-        {data && (
-          <ul>
-            <li>{data.artist}</li>
-            <li>Preview: {data.name}</li>
-            <audio src={data.previewUrl} controls></audio>
-            <img src={data.image} alt="artist" id="artistImg" />
-          </ul>
-        )}
-      </div>
+
+      <Group position="apart" spacing="md">
+        <Card
+          key={data?.artist}
+          shadow="xs"
+          padding="md"
+          style={{
+            backgroundColor: "#f3f4f6",
+            borderRadius: "8px",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              marginBottom: "8px",
+            }}
+          >
+            <Image
+              src={data?.image}
+              alt={data?.artist}
+              className="image"
+              width={80}
+              height={80}
+              style={{ borderRadius: "8px" }}
+            />
+            <div style={{ marginLeft: "12px" }}>
+              <Text size="lg" weight={700}>
+                {data?.artist}
+              </Text>
+            </div>
+          </div>
+          <Text>{data?.name}</Text>
+          <audio src={data?.previewUrl} controls />
+        </Card>
+      </Group>
       {recommendationData && (
         <div>
-          <h3>Recommendations</h3>
-          <ul>
+          <Text fz="xl" color="white" weight={700}>
+            Recommendations
+          </Text>
+          <Group position="apart" spacing="md">
             {recommendationData.map((recommendation: any) => (
-              <li key={recommendation.name}>
-                <p>Artist: {recommendation.artist}</p>
-                <p>Song: {recommendation.name}</p>
+              <Card
+                key={recommendation.name}
+                shadow="xs"
+                padding="md"
+                style={{
+                  backgroundColor: "#f3f4f6",
+                  borderRadius: "8px",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    marginBottom: "8px",
+                  }}
+                >
+                  <Image
+                    src={recommendation.image}
+                    alt={recommendation.artist}
+                    width={80}
+                    height={80}
+                    style={{ borderRadius: "8px" }}
+                  />
+                  <div style={{ marginLeft: "12px" }}>
+                    <Text size="lg" weight={700}>
+                      Artist: {recommendation.artist}
+                    </Text>
+                    <Badge color="teal">{recommendation.genres}</Badge>
+                  </div>
+                </div>
+                <Text>song: {recommendation.name}</Text>
                 <audio src={recommendation.previewUrl} controls />
-              </li>
+              </Card>
             ))}
-          </ul>
+          </Group>
         </div>
       )}
     </div>

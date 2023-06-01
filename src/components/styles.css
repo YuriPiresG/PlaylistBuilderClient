@@ -1,12 +1,23 @@
+body {
+  background: linear-gradient(90deg, #000000 0%, #808080 100%);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+ul {
+  color: white;
+}
+h3 {
+  color: white;
+}
 #test img {
   width: 15rem;
-
+  animation: mymove 1.5s;
+  animation-timing-function: ease;
   -webkit-animation: fadein 1.5s;
 }
 #test ul {
   -webkit-animation: fadein 1s;
 }
-
 @keyframes fadein {
   from {
     opacity: 0;
@@ -15,19 +26,9 @@
     opacity: 1;
   }
 }
-/* 
-#search{
-    background-color: red;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    width: 50%;
-    height: 100%;
+.image {
+  width: 15rem;
+  animation: mymove 1.5s;
+  animation-timing-function: ease;
+  -webkit-animation: fadein 1.5s;
 }
-#result{
-    background-color: purple;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    width: 50%;
-} */
