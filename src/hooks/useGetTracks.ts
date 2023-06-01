@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
-const useGetTracks = (id: string, accessToken: string, isWindowFocused: boolean) => {
+const useGetTracks = (id: string, accessToken: string) => {
   const useGetTracks = async () => {
     const response = await axios.get(
       `https://api.spotify.com/v1/recommendations?seed_tracks=${id}&limit=10`,
